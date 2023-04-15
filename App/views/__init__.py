@@ -1,12 +1,11 @@
-from .rental import rental_views
-from .index import index_views
 from .auth import auth_views
-# from .game import game_views
-# from .listing import listing_views
-# from .payment import payment_views
+from .allworkouts import allworkouts_views
+from .myworkouts import myworkouts_views
+from .workout import workout_views
 
 views = [
-    index_views,
-    rental_views,
+    workout_views,
+    myworkouts_views,
+    allworkouts_views,
     auth_views
 ]

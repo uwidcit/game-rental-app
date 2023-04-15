@@ -2,13 +2,12 @@ from flask import Blueprint, redirect, render_template, request, send_from_direc
 from flask_login import login_user, logout_user
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
-from App.models import Customer
+from App.models import User
 
 
 @auth_views.route('/login', methods=['GET'])
 def login_page():
-    rentals = []
-    sally = Customer.query.get(2)
+    sally = User.query.get(2)
     login_user(sally)
     return redirect(request.referrer)
     # return render_template('rentals.html', rentals=[])

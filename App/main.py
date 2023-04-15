@@ -10,7 +10,7 @@ from datetime import timedelta
 from App.database import init_db
 from App.views import views
 from App.config import config
-from App.models import Customer
+from App.models import User#Customer
 
 
 def add_views(app):
@@ -35,11 +35,11 @@ def create_app(config_overrides={}):
     init_db(app)
     app.app_context().push()
 
-    @login_manager.user_loader
-    def load_user(user_id):
-        customer =  Customer.query.get(user_id)
-        if customer:
-            return customer
-        return Staff.query.get(user_id)
+    # @login_manager.user_loader
+    # def load_user(user_id):
+    #     customer =  Customer.query.get(user_id)
+    #     if customer:
+    #         return customer
+    #     return Staff.query.get(user_id)
 
     return app

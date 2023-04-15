@@ -1,21 +1,14 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
-
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, json
+import requests
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 from App.controllers import (
-    get_listing,
-    get_all_listings,
     initialize,
 )
 
 @index_views.route('/', methods=['GET'])
-def index_page(listing_id=None):
-    listings = get_all_listings()
-    return render_template('index.html', listings=listings)
+def index_page():
+    return render_template('index.html')
 
-@index_views.route('/<int:listing_id>', methods=['GET'])
-def get_listing_page(listing_id):
-    listing = get_listing(listing_id)
-    return render_template('detail.html', listing=listing)
 
 @index_views.route('/init', methods=['GET'])
 def init():
