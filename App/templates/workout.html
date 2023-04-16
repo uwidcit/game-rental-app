@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+    {% for workout in workouts.items %}
+    <div>
+      <h3>{{ workout.name }}</h3>
+      <p>{{ workout.description }}</p>
+      <p>Muscle: {{ workout.muscle }}</p>
+      <p>Type: {{ workout.type }}</p>
+      <p>Difficulty: {{ workout.difficulty }}</p>
+      <!-- Add more workout attributes as necessary -->
+    </div>
+  {% endfor %}
+  
+  <!-- Pagination links -->
+  {% if workouts.has_prev %}
+    <a href="{{ url_for('workout_views.workout_page', page=workouts.prev_num) }}">Previous</a>
+  {% endif %}
+  {% for num in workouts.iter_pages() %}
+    {%if num%}
+      {% if num == workouts.page %}
+        <span>{{ num }}</span>
+      {% else %}
+        <a href="{{ url_for('workout_views.workout_page', page=num) }}">{{ num }}</a>
+      {% endif %}
+    {%endif%}
+  {% endfor %}
+  {% if workouts.has_next %}
+    <a href="{{ url_for('workout_views.workout_page', page=workouts.next_num) }}">Next</a>
+  {% endif %} 
+
+</body>
+</html>

@@ -18,15 +18,18 @@ def get_workout(name):
     if workout :
         return workout
     else:
-        workout = fetch_api_workout(name)
-        workouts = []
-        if workout:
-            for w in workout:
-                new_workout = Workout(name=w['name'].title(), type=w['type'], muscle=w['muscle'], equipment=w['equipment'], difficulty=w['difficulty'], instructions=w['instructions'])
-                workouts.append(new_workout)
-                db.session.add(new_workout)
-            db.session.commit()
-            return workouts
+        try:
+            workout = fetch_api_workout(name)
+            workouts = []
+            if workout:
+                for w in workout:
+                    new_workout = Workout(name=w['name'].title(), type=w['type'], muscle=w['muscle'], equipment=w['equipment'], difficulty=w['difficulty'], instructions=w['instructions'])
+                    workouts.append(new_workout)
+                    db.session.add(new_workout)
+                db.session.commit()
+                return workouts
+        except Exception as e:
+            raise Exception(f"Error fetching workout from API: {e}")
     return None
 
 def get_all_workouts():
@@ -40,7 +43,7 @@ def fetch_api_workout(query):
            response.raise_for_status()
         return json.loads(response.text)
     except Exception as e:
-        print(f"error: {e}")
+        raise Exception(f"Error fetching workouts from API: {e}")
     return None
 
 def fetch_api_workouts(query_type, query):
@@ -51,38 +54,70 @@ def fetch_api_workouts(query_type, query):
            response.raise_for_status()
         return json.loads(response.text)
     except Exception as e:
-        print(f"error: {e}")
+        raise Exception(f"Error fetching workouts from API: {e}")
     return []
     
-def cache_api_workouts():
+# def cache_api_workouts():
     
+#     query_type = ["type", "muscle", "difficulty"]
+#     query_by_type = ["cardio", "plyometrics", "strength","stretching","strongman","powerlifting"]
+#     query_by_muscle = ["abdominals" ,"chest","glutes","quadriceps","lower_back","abductors","calves", "hamstrings"]
+#     query_by_difficulty = ["beginner", "intermediate", "expert"]
+#     workouts = []
+#     for x in query_by_type:
+#         workouts_by_type = fetch_api_workouts(query_type="type", query=x)
+#         for workout in  workouts_by_type:
+#             new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+#             workouts.append(new_workout)
+#             db.session.add(new_workout)
+#     for x in query_by_muscle:
+#         workouts_by_type= fetch_api_workouts(query_type="muscle", query=x)
+#         for workout in  workouts_by_type:
+#             new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+#             workouts.append(new_workout)
+#             db.session.add(new_workout)
+#     for x in query_by_difficulty:
+#         workouts_by_type= fetch_api_workouts(query_type="difficulty", query=x)
+#         for workout in  workouts_by_type:
+#             new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+#             workouts.append(new_workout)
+#             db.session.add(new_workout)
+#     db.session.commit()
+#     return workouts
+
+
+def cache_api_workouts():
     query_type = ["type", "muscle", "difficulty"]
     query_by_type = ["cardio", "plyometrics", "strength","stretching","strongman","powerlifting"]
     query_by_muscle = ["abdominals", "biceps", "chest","glutes","quadriceps","lower_back","abductors","calves", "hamstrings"]
     query_by_difficulty = ["beginner", "intermediate", "expert"]
-    workouts = []
+    workouts = set()
     for x in query_by_type:
-        workouts_by_type= fetch_api_workouts(query_type="type", query=x)
-        for workout in  workouts_by_type:
-            new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
-            workouts.append(new_workout)
-            db.session.add(new_workout)
+        workouts_by_type = fetch_api_workouts(query_type="type", query=x)
+        for workout in workouts_by_type:
+            name = workout['name'].title()
+            if name not in workouts:
+                new_workout = Workout(name=name, type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+                workouts.add(name)
+                db.session.add(new_workout)
     for x in query_by_muscle:
-        workouts_by_type= fetch_api_workouts(query_type="mucle", query=x)
-        for workout in  workouts_by_type:
-            new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
-            workouts.append(new_workout)
-            db.session.add(new_workout)
+        workouts_by_type= fetch_api_workouts(query_type="muscle", query=x)
+        for workout in workouts_by_type:
+            name = workout['name'].title()
+            if name not in workouts:
+                new_workout = Workout(name=name, type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+                workouts.add(name)
+                db.session.add(new_workout)
     for x in query_by_difficulty:
         workouts_by_type= fetch_api_workouts(query_type="difficulty", query=x)
-        for workout in  workouts_by_type:
-            new_workout = Workout(name=workout['name'].title(), type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
-            workouts.append(new_workout)
-            db.session.add(new_workout)
+        for workout in workouts_by_type:
+            name = workout['name'].title()
+            if name not in workouts:
+                new_workout = Workout(name=name, type=workout['type'], muscle=workout['muscle'], equipment=workout['equipment'], difficulty=workout['difficulty'], instructions=workout['instructions'])
+                workouts.add(name)
+                db.session.add(new_workout)
     db.session.commit()
     return workouts
-
-
 
 def get_all_workouts_json():
     workouts = Workout.query.all()
@@ -106,6 +141,26 @@ def get_all_workouts_by_diffculty(query):
     workouts =  Workout.query.filter_by(difficulty=query).all()
     if not workouts:
         return []
+    return workouts
+
+def get_all_workouts1(muscle=None, workout_type=None, difficulty=None, page=1):
+    query = Workout.query
+
+    # Filter by muscle group if provided
+    if muscle:
+        query = query.filter_by(muscle=muscle)
+
+    # Filter by workout type if provided
+    if workout_type:
+        query = query.filter_by(type=workout_type)
+
+    # Filter by difficulty level if provided
+    if difficulty:
+        query = query.filter_by(difficulty=difficulty)
+
+    # Paginate the results
+    workouts = query.paginate(page=page, per_page=10)
+
     return workouts
 
 def get_workout_by_id(workoutId):

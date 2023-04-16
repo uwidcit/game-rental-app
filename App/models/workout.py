@@ -18,7 +18,7 @@ class Workout(db.Model):
         self.instructions = instructions
 
     def __repr__(self):
-        return f'<Workout {self.workoutId} - {self.name}>' 
+        return f'<Workout {self.workoutId} - {self.name} - {self.difficulty} - {self.type}>' 
 
     def toJSON(self):
         return {
