@@ -5,7 +5,7 @@ auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 from App.models import User
 from App.controllers import login, user_required
 
-@auth_views.route("/", methods=['GET'])
+@auth_views.route("/")
 def login_page():
   return render_template('login.html')
 
