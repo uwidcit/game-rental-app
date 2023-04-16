@@ -1,18 +1,47 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash
 from flask_login import login_user, logout_user
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 from App.models import User
+from App.controllers import login, user_required
 
-
-@auth_views.route('/login', methods=['GET'])
+@auth_views.route("/", methods=['GET'])
 def login_page():
-    sally = User.query.get(2)
-    login_user(sally)
-    return redirect(request.referrer)
-    # return render_template('rentals.html', rentals=[])
+  return render_template('login.html')
+
+@auth_views.route('/signup', methods=['GET'])
+def signup_page():
+  return render_template('signup.html')
+
+@auth_views.route('/login', methods=['POST'])
+def login_action():
+  data = request.form
+  user = login(data['username'], data['password'])
+  if user:  # check credentials
+    flash('Logged in successfully.')  # send message to next page
+    login_user(user)  # login the user
+    return redirect('/allworkouts')  # redirect to main page if login successful
+  else:
+    flash('Invalid username or password')  # send message to next page
+  return redirect(request.referrer)
+
+@auth_views.route('/signup', methods=['POST'])
+def signup_action():
+  data = request.form  # get data from form submission
+  newuser = User(username=data['username'],password=data['password'])  # create user object
+  try:
+    db.session.add(newuser)
+    db.session.commit()  # save user
+    login_user(newuser)  # login the user
+    flash('Account Created!')  # send message
+    return redirect(url_for('login'))  # redirect to homepage
+  except Exception as e:  # attempted to insert a duplicate user
+    db.session.rollback()
+    flash("username or email already exists")  # error message
+  return redirect(url_for('signup_page'))
 
 @auth_views.route('/logout', methods=['GET'])
+@user_required
 def logout_action():
     logout_user()
     return redirect('/')

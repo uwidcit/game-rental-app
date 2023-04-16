@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, json
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, json, flash
 import requests
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 from App.controllers import (

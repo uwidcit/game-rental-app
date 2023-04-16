@@ -14,7 +14,7 @@ def create_workout(name, type, muscle, equipment, difficulty , instructions):
 
 
 def get_workout(name):
-    workout = Workout.query.filter_by(name=name).all()
+    workout = Workout.query.filter(Workout.name.like(f'%{name}%')).all()
     if workout :
         return workout
     else:

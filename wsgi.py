@@ -115,8 +115,8 @@ def list_workout_by_difficulty_command(query):
 def list_workout_by_difficulty_command(query):
     print(get_all_workouts_by_muscle(query))
 
-@workout_cli.command("get_workout", help="Get workout by specified name in the database")
-@click.argument("name", default="squat isometric hold")
+@workout_cli.command("search", help="Get workout by specified name in the database")
+@click.argument("name", default="push-ups")
 def list_workout_by_difficulty_command(name):
     print(get_workout(name.title()))
 
@@ -136,17 +136,17 @@ myworkout_cli = AppGroup('myworkout', help='User workouts commands')
 
 @myworkout_cli.command("save", help="Save workout for user into into the database")
 @click.argument("username", default="bob")
-@click.argument("workoutid", default="3")
+@click.argument("workoutid", default="53")
 @click.argument("sets", default="3")
 @click.argument("reps", default="8")
-@click.argument("weight", default="10lbs")
+@click.argument("weight", default="25lbs")
 @click.argument("day", default="mon")
 def save_workout_command(username, workoutid, sets, reps, weight, day):
   user = User.query.filter_by(username=username).first()
   if user:
     new_workout = save_workout(user.id, workoutid, sets, reps, weight, day)
     workout = get_workout_by_id(new_workout.workoutId)
-    print(f'Workout:{new_workout.uwId} {workout.name} {new_workout.sets} {new_workout.day} created!')
+    print(f'Workout:{new_workout.uwId} {workout.name} {new_workout.sets} {new_workout.day} {new_workout.weight} created!')
   else:
     print(f'{username} not found!')
 

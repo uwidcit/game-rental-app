@@ -1,0 +1,11 @@
+.grow-2{
+    grid-column: span 2 
+}
+
+img{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height:100%;
+    object-fit: fill;
+}
