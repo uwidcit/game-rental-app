@@ -9,6 +9,7 @@ from App.controllers import (
     user_required
 )
 
+#returns multiple workouts in each attribute so use a for loop to list
 @myworkouts_views.route('/myworkouts', methods=['GET'])
 @user_required
 def myworkouts_page():
@@ -21,6 +22,7 @@ def myworkouts_page():
     sun = get_workouts_by_day(current_user.id,"sun")
     return render_template('myworkouts.html', mon = mon , tue=tue, wed = wed, thu = thu, fri= fri, sat=sat, sun = sun)
 
+#just does a flash and reloads the page to show the updated info
 @myworkouts_views.route('/myworkouts/<int:uwid>', methods=['POST'])
 @user_required
 def editWorkout(uwid):
@@ -31,10 +33,10 @@ def editWorkout(uwid):
         # workout = get_workout_by_id(new_workout.workoutId)
         return redirect(request.referrer)
 
-@myworkouts_views.route('/myworkouts/<int:uwid>', methods=['POST'])
+#just does a flash and reloads the page to show the updated info
+@myworkouts_views.route('/myworkouts/<int:uwid>', methods=['GET'])
 @user_required
 def deleteWorkout(uwid):
-    data = request.form
     if delete_workout(uwid,current_user.id):
         flash("Successfully Deleted")
         # workout = get_workout_by_id(new_workout.workoutId)

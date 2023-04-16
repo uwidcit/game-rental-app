@@ -7,8 +7,9 @@ allworkouts_views = Blueprint('allworkouts_views', __name__, template_folder='..
 def allworkouts_page():
     return render_template('allworkouts.html')
 
+#returns multiple workouts
 @allworkouts_views.route('/search', methods=['POST'])
 def searchworkouts_page():
     data = request.form
     workouts = get_workout(data["name"])
-    return render_template('search.html', workouts=workouts)
+    return render_template('search.html', workouts=workouts) 

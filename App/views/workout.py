@@ -8,21 +8,26 @@ from App.controllers import (
     user_required
 )
 
+#returns multiple workouts in each attribute so use a for loop to list
 @workout_views.route('/musclegroup/<query>', methods=['GET'])
 def workout_page_muscle(query):
     workouts = get_all_workouts_by_muscle(query)
     return render_template('workout.html', workouts=workouts)
 
+#returns multiple workouts in each attribute so use a for loop to list
 @workout_views.route('/type/<query>', methods=['GET'])
 def workout_page_type(query):
     workouts = get_all_workouts_by_type(query)
     return render_template('workout.html', workouts=workouts)
 
+#returns multiple workouts in each attribute so use a for loop to list
 @workout_views.route('/diffuculty/<query>', methods=['GET'])
 def workout_page_diffuculty(query):
     workouts = get_all_workouts_by_diffuculty(query)
     return render_template('workout.html', workouts=workouts)
 
+
+#just does a flash and reloads the page
 @workout_views.route('/workout/<int:workoutId>', methods=['POST'])
 @user_required
 def saveWorkout(workoutId):
