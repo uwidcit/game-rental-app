@@ -35,11 +35,10 @@ def create_app(config_overrides={}):
     init_db(app)
     app.app_context().push()
 
-    # @login_manager.user_loader
-    # def load_user(user_id):
-    #     customer =  Customer.query.get(user_id)
-    #     if customer:
-    #         return customer
-    #     return Staff.query.get(user_id)
+    @login_manager.user_loader
+    def load_user(user_id):
+        user =  User.query.get(user_id)
+        if user:
+            return user
 
     return app

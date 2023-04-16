@@ -6,7 +6,7 @@ from functools import wraps
 
 
 def login(username, password):
-    user = User1.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first()
     if user and user.check_password(password):
         return user   
     return None
@@ -14,9 +14,9 @@ def login(username, password):
 def initialize():
     db.drop_all()
     db.create_all()
-    rob = create_user('rob', 'robpass')    
+    #rob = create_user('rob', 'robpass')    
     bob = create_user('bob', 'bobpass')
-    cache_api_workouts()
+    #cache_api_workouts()
    
 
 def user_required(func):
