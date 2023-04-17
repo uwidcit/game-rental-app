@@ -16,7 +16,7 @@ def initialize():
     db.create_all()
     #rob = create_user('rob', 'robpass')    
     bob = create_user('bob', 'bobpass')
-    cache_api_workouts()
+    #cache_api_workouts()
    
 
 def user_required(func):
