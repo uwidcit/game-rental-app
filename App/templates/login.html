@@ -7,14 +7,14 @@
 
 {% block content %}
 <div class="content fill-space">
-  <img class="grow-2" src="/static/img/R.png">
+  
   <div class="subcontent center-vertical">
-    <h4 class="center">Login</h4>
+    <h4 class="center"> </h4>
     <form id="loginForm" method="POST" action="/login" style="padding:1em">
 
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="placeholder" id="username" name="username" type="text" class="validate">
+          <input placeholder="username" id="username" name="username" type="text" class="validate">
           <label for="username">Username</label>
         </div>
       </div>
@@ -25,12 +25,14 @@
         </div>
       </div>
       <div class="row justify-content">
-        <div class="col s4 card-action">
-          <input type="submit" class="blue text-white btn" value="Login">
+        <div class="center">
+          <input type="submit" class="black text-white btn" value="Sign In">
         </div>
 
-        <div class="col s8 card-action right-align">
-          <a href="/signup">Don't have an account? Sign Up</a>
+        <br>
+
+        <div class="center">
+          <a href="/signup">New to FitX? Sign Up</a>
         </div>
       </div>
 
