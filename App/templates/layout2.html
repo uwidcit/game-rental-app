@@ -27,7 +27,7 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="/home">Home</a></li>
             <li><a href="/allworkouts">All Exercises</a></li>
-            <li><a href="#">My Workouts</a></li>
+            <li><a href="/myworkouts">My Workouts</a></li>
             <li><a href="#">Logout</a></li>
           </ul>
         </div>
@@ -37,7 +37,7 @@
     <ul class="sidenav" id="mobile-demo">
       <li><a href="#">Home</a></li>
       <li><a href="/allworkouts">All Exercises</a></li>
-      <li><a href="#">My Workouts</a></li>
+      <li><a href="/myworkouts">My Workouts</a></li>
       <li><a href="#">Logout</a></li>
     </ul>
    
@@ -61,6 +61,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         M.AutoInit();
+        
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   var elems = document.querySelectorAll('.modal');
+  //   var instances = M.Modal.init(elems);
+
+  //   var buttons = document.querySelectorAll('.modal-trigger');
+  //   for (var i = 0; i < buttons.length; i++) {
+  //     buttons[i].addEventListener('click', function() {
+  //       var workoutName = this.getAttribute('data-workout-name');
+  //       document.getElementById('modal-title').innerHTML = workoutName;
+  //     });
+  //   }
+  // });
+
+        var buttons = document.querySelectorAll('.modal-trigger');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener('click', function() {
+            var workoutId = this.getAttribute('data-workout-id');
+            var workoutName = this.getAttribute('data-workout-name');
+            document.getElementById('modal-title').innerHTML = workoutName;
+            document.getElementById('workoutId').value = workoutId;
+          });
+        }
     </script>
     
     

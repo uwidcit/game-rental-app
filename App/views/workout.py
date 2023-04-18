@@ -1,11 +1,14 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash
+from flask_login import current_user
 
 workout_views = Blueprint('workout_views', __name__, template_folder='../templates')
 from App.controllers import (
     #get_all_workouts_by_muscle,
    # get_all_workouts_by_type,
     #get_all_workouts_by_diffculty,
+    save_workout,
     get_all_workouts1,
+    get_workout_by_id,
     user_required
 )
 
@@ -29,11 +32,11 @@ from App.controllers import (
 
 
 #just does a flash and reloads the page
-@workout_views.route('/workout/<int:workoutId>', methods=['POST'])
+@workout_views.route('/workout', methods=['POST'])
 @user_required
-def saveWorkout(workoutId):
-  data = request.form
-  new_workout = save_workout(current_user.id, workoutId, data["sets"], data["reps"], data["weight"], data["day"])
+def saveWorkout():
+  data = request.form  
+  new_workout = save_workout(current_user.id, data["workoutId"], data["sets"], data["reps"], data["weight"], data["day"])
   workout = get_workout_by_id(new_workout.workoutId)
   flash('Successfully Saved' + " " + workout.name)
   return redirect(request.referrer)

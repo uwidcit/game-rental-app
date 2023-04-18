@@ -22,7 +22,81 @@
 <div class="container">
   <div class="row">
     {% for workout in workouts %}
-    <!-- <div class="col s12 m6 l4">
+   
+    <div class="col s12 m6">      
+      <div class="card purple darken-1 hoverable">
+        <div class="card-content white-text">
+          <span class="card-title">{{ workout.name }}</span>
+          <p>Type: {{ workout.type }}</p>
+          <!-- <p>Description: {{ workout.description }}</p> -->
+          <p>Equipment: {{ workout.equipment }}</p>
+          <p>Difficulty: {{ workout.difficulty }}</p>          
+          <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal1" data-workout-id="{{ workout.workoutId }}" data-workout-name="{{ workout.name }}"><i class="material-icons">add</i></a>
+
+        </div>
+      </div>
+    </div>    
+    {% endfor %}
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 id="modal-title"></h4>
+        <form method="POST" action="{{ url_for('workout_views.saveWorkout')}}" id="saveForm">
+          <input type="hidden" id="workoutId" name="workoutId" value="1">
+          <div class="input-field">
+            <input id="sets" type="number" name ="sets" class="validate">
+            <label for="sets">Sets</label>
+          </div>
+          <div class="input-field">
+            <input id="reps" type="number" name ="reps" class="validate">
+            <label for="reps">Reps</label>
+          </div>
+          <div class="input-field">
+            <input id="weight" type="text" name = "weight" class="validate">
+            <label for="weight">Weight</label>
+          </div>
+         
+          <p>Days:</p>
+          <label>
+            <input type="radio" name="day" value="mon" />
+            <span>Mon</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="tue" />
+            <span>Tue</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="wed" />
+            <span>Wed</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="thu" />
+            <span>Thur</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="fri" />
+            <span>Fri</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="sat" />
+            <span>Sat</span>
+          </label>
+          <label>
+            <input type="radio" name="day" value="sun" />
+            <span>Sun</span>
+          </label>
+          <div class="modal-footer">
+            <button type="submit" class="waves-effect waves-green btn-flat">Save</button>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+{% endblock %}
+ <!-- <div class="col s12 m6 l4">
       <div class="card">
         <div class="card-image">
           <img src="https://via.placeholder.com/400x400" alt="Workout Image">
@@ -37,86 +111,3 @@
         </div>
       </div>
     </div> -->
-    <div class="col s12 m6">      
-      <div class="card purple darken-1 hoverable">
-        <div class="card-content white-text">
-          <span class="card-title">{{ workout.name }}</span>
-          <p>Type: {{ workout.type }}</p>
-          <!-- <p>Description: {{ workout.description }}</p> -->
-          <p>Equipment: {{ workout.equipment }}</p>
-          <p>Difficulty: {{ workout.difficulty }}</p>
-          <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</div>
-
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <h4>Workout Name</h4>
-    <form>
-      <div class="input-field">
-        <input id="sets" type="number" class="validate">
-        <label for="sets">Sets</label>
-      </div>
-      <div class="input-field">
-        <input id="reps" type="number" class="validate">
-        <label for="reps">Reps</label>
-      </div>
-      <div class="input-field">
-        <input id="weight" type="number" class="validate">
-        <label for="weight">Weight</label>
-      </div>
-      <p>Days:</p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Monday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Tuesday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Wednesday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Thursday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Friday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Saturday</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>Sunday</span>
-        </label>
-      </p>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
-  </div>
-</div>
-</main>
-{% endblock %}
