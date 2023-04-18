@@ -3,6 +3,8 @@ import requests
 allworkouts_views = Blueprint('allworkouts_views', __name__, template_folder='../templates')
 #from App.controllers import ()
 
+
+
 @allworkouts_views.route('/allworkouts', methods=['GET'])
 def allworkouts_page():
     return render_template('allworkouts.html')

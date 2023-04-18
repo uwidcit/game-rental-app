@@ -95,9 +95,7 @@ workout_cli = AppGroup('workout', help='Workout object commands')
 #     create_game(title, rating, platform, boxart, genre)
 #     print(f'{title} created!')
 
-@workout_cli.command("list", help="Lists workouts in the database")
-def list_workout_command():
-    print(get_all_workouts())
+
 
     
 @workout_cli.command("list_by_difficulty", help="Lists workouts by specified difficulty in the database")
@@ -124,6 +122,19 @@ def list_workout_by_difficulty_command(name):
 def load_workout_command():
     workouts = cache_api_workouts()
     print(f"{len(workouts)} workouts loaded from API")
+
+@workout_cli.command("load2", help="Loads workouts from the api into the database") 
+def load_workout_command():
+    workouts = cache_api_extra_workouts()
+    print(f"{len(workouts)} workouts loaded from API")
+
+@workout_cli.command("list", help="Lists workouts in the database")
+def list_workout_command():
+    print(get_all_workouts())
+
+@workout_cli.command("list2", help="Lists workouts in the database")
+def list_workout_command():
+    print(get_all_workouts2())
 
 app.cli.add_command(workout_cli)
 

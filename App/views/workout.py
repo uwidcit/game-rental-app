@@ -41,20 +41,33 @@ def saveWorkout(workoutId):
 
 
 # Use a single route for filtering
-@workout_views.route('/workouts', methods=['GET'])
-def workout_page():
+@workout_views.route('/workouts/<value>', methods=['GET'])
+def workout_page(value):
     # Get filter criteria from query parameters
-    muscle = request.args.get('muscle')
-    workout_type = request.args.get('type')
-    difficulty = request.args.get('difficulty')
+
+    type_group = ["cardio", "plyometrics", "strength","stretching","strongman","powerlifting"]
+    muscle_group  = ["abdominals", "biceps", "chest","glutes","quadriceps","lower_back","abductors","calves", "hamstrings"]
+    difficulty_group = ["beginner", "intermediate", "expert"]
+    muscle = None
+    workout_type = None
+    difficulty = None
+    if value in muscle_group:
+      muscle = value
+    elif value in type_group:
+      workout_type = value
+    elif value in difficulty_group:
+      difficulty = value
+    #muscle = request.args.get('muscle')
+    #workout_type = request.args.get('type')
+    #difficulty = request.args.get('difficulty')
     page = request.args.get('page', default=1, type=int)
    
-    if muscle is not None or workout_type is not None or difficulty is not None:
+    #if muscle is not None or workout_type is not None or difficulty is not None:
     # Call the get_all_workouts function with filter criteria and pagination parameters
-      workouts = get_all_workouts1(muscle=muscle, workout_type=workout_type, difficulty=difficulty, page=page)    
+    workouts = get_all_workouts1(muscle=muscle, workout_type=workout_type, difficulty=difficulty, page=page)    
       #print(workouts.items)
     # Pass the workouts and pagination information to the template
-      return render_template('workout.html', workouts=workouts, pagination=page)
-    else:
+    return render_template('workout.html', workouts=workouts, pagination=page, value=value.title())
+    #else:
         # No filter criteria specified, redirect to all workouts page
-        return redirect('/allworkouts')
+     #   return redirect('/allworkouts')

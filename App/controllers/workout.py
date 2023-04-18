@@ -1,4 +1,4 @@
-from App.models import Workout
+from App.models import Workout, ExtraWorkout
 from App.database import db
 from App.config import config
 
@@ -35,6 +35,9 @@ def get_workout(name):
 def get_all_workouts():
     return Workout.query.all()
 
+def get_all_workouts2():
+    return ExtraWorkout.query.all()
+
 def fetch_api_workout(query):    
     api_url = f'https://api.api-ninjas.com/v1/exercises?name={query}'
     try:
@@ -56,6 +59,33 @@ def fetch_api_workouts(query_type, query):
     except Exception as e:
         raise Exception(f"Error fetching workouts from API: {e}")
     return []
+
+def fetch_api_extra_workouts():
+    api_url = 'https://exercisedb.p.rapidapi.com/exercises'
+    headers = {
+        "X-RapidAPI-Key": "e6c22e8e13mshf7acf532fb1d00cp148c62jsn39fb0852a2ae",
+        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+    }
+    try:
+        response = requests.request("GET", api_url, headers=headers)
+        if response.status_code != requests.codes.ok:  
+           response.raise_for_status()
+        return json.loads(response.text)
+    except Exception as e:
+        raise Exception(f"Error fetching workouts from API: {e}")
+    return []
+
+def cache_api_extra_workouts():
+    
+    workouts = fetch_api_extra_workouts()
+    works =[]
+    for workout in workouts:
+        name = workout['name'].title()                                    
+        new_workout = ExtraWorkout(name=name, bodyPart=workout['bodyPart'], gifUrl=workout['gifUrl'], equipment=workout['equipment'], target=workout['target'])
+        works.append(new_workout)
+        db.session.add(new_workout)
+    db.session.commit()
+    return works
     
 # def cache_api_workouts():
     

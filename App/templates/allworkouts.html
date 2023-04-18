@@ -1,40 +1,177 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
+{% extends "layout2.html" %}
+{% block title %}All Exercises{% endblock %}
+{% block page %}All Exercises{% endblock %}
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+{% block content%}
 
-<form action="{{ url_for('workout_views.workout_page') }}" method="GET">
-    <label for="muscle">Muscle:</label>
-    <select name="muscle" id="muscle">
-      <option value="">All</option>
-      <option value="biceps">Biceps</option>
-      <option value="glutes">Glutes</option>
-      <option value="hamstrings">Hamstrings</option>
-    </select>
-    
-    <label for="type">Type:</label>
-    <select name="type" id="type">
-      <option value="">All</option>
-      <option value="cardio">Cardio</option>
-      <option value="strength">Strength</option>
-      <option value="plyometrics">Plyometrics</option>
-    </select>
-    
-    <label for="difficulty">Difficulty:</label>
-    <select name="difficulty" id="difficulty">
-      <option value="">All</option>
-      <option value="beginner">Beginner</option>
-      <option value="intermediate">Intermediate</option>
-      <option value="expert">Expert</option>
-    </select>
-  
-    <button type="submit">Filter Workouts</button>
-  </form>
+<main>
+	<section class="section">
+		<div class="container">
+			<h3>Muscle Group</h3>
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Abs</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="{{ url_for('workout_views.workout_page', value='abdominals')}}" ><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Abs Workout</p>
+						</div>						
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Chest</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="{{ url_for('workout_views.workout_page', value='chest')}}"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Chest Workout</p>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Glutes</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Glutes Workout</p>
+						</div>
+					</div>
+				</div>
+			</div>
+      <div class="row">
+        <div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Glutes</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Glutes Workout</p>
+						</div>
+					</div>
+				</div>
+        <div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Glutes</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Glutes Workout</p>
+						</div>
+					</div>
+				</div>
+        <div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Glutes</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Glutes Workout</p>
+						</div>
+					</div>
+				</div>
+      </div>
+		</div>
+	</section>
+	<section class="section grey lighten-4">
+		<div class="container">
+			<h3>Difficulty</h3>
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Beginner</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Beginner Workout</p>
+						</div>						
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Intermediate</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Intermediate Workout</p>
+						</div>						
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Expert</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+              <p>Description of Expert Workout</p>            
+					</div>         
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<h3>Type</h3>
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Cardio</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Cardio Workout</p>
+						</div>						
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Strength</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Strength Workout</p>
+						</div>						
+					</div>
+				</div>
+				<div class="col s12 m4">
+					<div class="card hoverable">
+						<div class="card-image">
+							<img src="https://materializecss.com/images/sample-1.jpg">
+							<span class="card-title">Plyometrics</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+							<p>Description of Plyometrics Workout</p>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
 
-</body>
-</html>
+
+{% endblock %}

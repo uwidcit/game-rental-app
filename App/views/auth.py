@@ -20,7 +20,7 @@ def login_action():
   if user:  # check credentials
     flash('Logged in successfully.')  # send message to next page
     login_user(user)  # login the user
-    return redirect('/allworkouts')  # redirect to main page if login successful
+    return redirect('/home')  # redirect to main page if login successful
   else:
     flash('Invalid username or password')  # send message to next page
   return redirect(request.referrer)
