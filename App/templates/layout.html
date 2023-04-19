@@ -25,8 +25,9 @@
       height: 100%;
     }
  
-    nav .brand-logo.left {
-        left: 4rem;
+    nav .brand-logo {
+        left: 8rem;
+        font-size: 40px;
       }
 
     #alert {
@@ -78,6 +79,33 @@
       color: #000000;      
       transform: translateY(-16%);
     }
+
+    /* .brand-logo {
+      font-size: 24px;
+      color: black;
+      text-shadow: none;
+    }
+
+    .brand-logo::after {
+      content: "X";
+      color: blue;
+      text-shadow: 3px 3px rgb(255, 255, 255);
+    } */
+
+    .brand-logo {
+      font-size: 2em; /* adjust the size as needed */
+    }
+
+    .brand-logo::before {
+      content: "Fit";
+    }
+
+    .brand-logo::after {
+      content: "X";
+      color: blue;
+      text-shadow: 1px 1px red;
+      font-size: 1.5em; /* adjust the size as needed */
+    }
     </style>
 
   </head>
@@ -85,7 +113,7 @@
     <!-- <div class="navbar-fixed"> -->
       <nav class="black darken-3">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">FitX</a>
+          <a href="#" class="brand-logo"></a>
           {% if current_user.is_authenticated %}
           <a href="/home" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
