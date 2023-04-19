@@ -4,6 +4,8 @@ from .workout import cache_api_workouts
 from .user import create_user
 from functools import wraps
 
+# def signup(username,password):
+    
 
 def login(username, password):
     user = User.query.filter_by(username=username).first()

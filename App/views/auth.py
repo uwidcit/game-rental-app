@@ -1,8 +1,8 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, url_for
 from flask_login import login_user, logout_user
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
-from App.models import User
+from App.models import db, User
 from App.controllers import login, user_required
 
 @auth_views.route("/")
@@ -32,13 +32,13 @@ def signup_action():
   try:
     db.session.add(newuser)
     db.session.commit()  # save user
-    login_user(newuser)  # login the user
+    #login_user(newuser)  # login the user
     flash('Account Created!')  # send message
-    return redirect(url_for('login'))  # redirect to homepage
+    return redirect(url_for('auth_views.login_page'))  # redirect to homepage
   except Exception as e:  # attempted to insert a duplicate user
     db.session.rollback()
     flash("username or email already exists")  # error message
-  return redirect(url_for('signup_page'))
+  return redirect(url_for('auth_views.signup_page'))
 
 @auth_views.route('/logout', methods=['GET'])
 @user_required

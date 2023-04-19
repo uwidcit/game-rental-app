@@ -8,48 +8,44 @@
 {% block content %}
 <div class="content fill-space">
   
-    <div class="subcontent center-vertical">
-      <h4 class="center"> </h4>
-      <form id="signUpForm" method="POST" action="/signup" style="padding:1em">
-  
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="username" id="username" name="username" type="text" class="validate">
-            <label for="username">Username</label>
-          </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="email" id="email" name="email" type="text" class="validate">
-              <label for="email">Email</label>
+  <div class="row center-align">
+    <div class="col s12 m6 offset-m3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title center">SignUP</span>
+          <form id="signUpForm" method="POST" action="/signup" style="padding:1em">
+            <div class="row">
+              <div class="input-field col s12">              
+                <input id="username" name="username" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                <label for="username" >Username</label>
+              </div>
             </div>
-          </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input name="password" id="password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <input name="confirmPassword" id="confirmPassword" type="password" class="validate">
-              <label for="confirmPassword">Confirm Password</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="password" id="password" type="password" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                <label for="password">Password</label>
+              </div>
             </div>
-          </div>
-        <div class="row justify-content">
-          <div class="center">
-            <input type="submit" class="black text-white btn" value="Sign Up">
-          </div>
-  
-          <br>
-  
-          <div class="center">
-            <a href="/login">Already a member of FitX? Sign In</a>
-          </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="password" id="password" type="password" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                <label for="password">Confirm Password</label>
+              </div>
+            </div>
+            <div class="row justify-content">
+              <div class="center">
+                <input type="submit" class="black text-white btn" value="Sign Up">
+              </div>
+              <br>
+              <div class="center">
+                <a href="/">Already a member of FitX? Sign In</a>
+              </div>
+            </div>
+          </form>
         </div>
-  
-      </form>
+      </div>
     </div>
+  </div>
   
   </div>
   {% endblock %}

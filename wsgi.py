@@ -56,46 +56,12 @@ def login_user_command(username, password):
 
 app.cli.add_command(user_cli) # add the group to the cli
 
-# '''
-# Staff Commands
-# '''
-
-# staff_cli = AppGroup('staff', help='Staff object commands') 
-
-# # Then define the command and any parameters and annotate it with the group (@)
-# @staff_cli.command("create", help="Creates a staff user")
-# @click.argument("username", default="bob")
-# @click.argument("password", default="bobpass")
-# def create_user_command(username, password):
-#     create_staff(username, password)
-#     print(f'{username} created!')
-
-
-# @staff_cli.command("list", help="Lists the staff in the database")
-# def list_user_command():
-#     print(get_all_staff())
-
-
-# app.cli.add_command(staff_cli) # add the group to the cli
 
 # '''
 # Workout Commands
 # '''
 
 workout_cli = AppGroup('workout', help='Workout object commands') 
-
-# Then define the command and any parameters and annotate it with the group (@)
-# @game_cli.command("create", help="Creates a game")
-# @click.argument("title", default="frogger")
-# @click.argument("rating", default="teens")
-# @click.argument("platform", default="NSW")
-# @click.argument("boxart", default="https://image.com/pic.png")
-# @click.argument("genre", default="platform")
-# def create_game_command(title, rating, platform, boxart, genre):
-#     create_game(title, rating, platform, boxart, genre)
-#     print(f'{title} created!')
-
-
 
     
 @workout_cli.command("list_by_difficulty", help="Lists workouts by specified difficulty in the database")
@@ -140,7 +106,7 @@ app.cli.add_command(workout_cli)
 
 
 # '''
-# Listing Commands
+# MyWorkout Commands
 # '''
 
 myworkout_cli = AppGroup('myworkout', help='User workouts commands') 
@@ -224,34 +190,6 @@ def list_user_workout_command(username):
             print(f'No workouts')
     else:
         print(f'{username} not found!')
-# @list_cli.command("list", help="Lists the available listings in the database")
-# def get_listings_command():
-#     print(get_available_listings(None))
 
-# @list_cli.command("create", help="Lets a user list a game for rental")
-# def list_game_command():
-#     print(get_all_customers())
-#     userId = input('Enter a userId: ')
-#     print(get_all_staff())
-#     staffId = input('Enter a staffId: ')
-#     print(get_all_games())
-#     gameId = input('Enter a gameId: ')
-#     res = list_game(staffId, userId, gameId)
-#     if res:
-#         print('Game added to user!')
-#     else :
-#         print("error add game to user")
-
-# @list_cli.command("remove", help="Delists a game")
-# def delist_game_command():
-#     print(get_all_staff())
-#     staffId = input('Enter a staffId: ')
-#     print(get_available_listings())
-#     listingId = input('Enter a listingId: ')
-#     res = delist_game(staffId, listingId)
-#     if res:
-#         print('Game un listed')
-#     else :
-#         print("Error removing listing bad ID or unauthorized")
 
 app.cli.add_command(myworkout_cli)
