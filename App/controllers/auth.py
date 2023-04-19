@@ -14,7 +14,7 @@ def login(username, password):
     return None
 
 def initialize():
-    db.drop_all()
+    #db.drop_all()
     db.create_all()
     #rob = create_user('rob', 'robpass')    
     bob = create_user('bob', 'bobpass')
