@@ -44,3 +44,8 @@ def deleteWorkout(uwid):
         flash("Successfully Deleted")
         # workout = get_workout_by_id(new_workout.workoutId)
         return redirect(request.referrer)
+
+@myworkouts_views.route('/createworkout' )
+@user_required
+def createWorkout_page():
+    return render_template('createworkout.html')
