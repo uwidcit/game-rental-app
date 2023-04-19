@@ -49,6 +49,35 @@
         cursor: pointer;
         /* change the cursor to a pointer on hover */
     }
+
+    .nav-wrapper form {
+      position: relative;
+    }
+
+    .nav-wrapper form .input-field {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: 5%;
+        transform: translateY(30%);
+    }
+
+    .nav-wrapper form .input-field input[type=search] {
+      background-color: #ffffff;
+      border-radius: 20px;
+      border: none;
+      box-shadow: none;
+      font-size: 16px;
+      height: 40px;
+      padding-left: 40px;
+      padding-right: 20px;
+      width: 200px;
+    }
+
+    .nav-wrapper form .input-field i {
+      color: #000000;      
+      transform: translateY(-16%);
+    }
     </style>
 
   </head>
@@ -63,6 +92,15 @@
             <li><a href="/home">Home</a></li>
             <li><a href="/allworkouts">All Exercises</a></li>
             <li><a href="/myworkouts">My Workouts</a></li>
+            <li>          
+              <form  method="GET" action="{{ url_for('allworkouts_views.searchWorkouts_page')}}" id="searchForm">
+                <div class="input-field">
+                  <input id="navbar-search" type="search" name="query" required>
+                  <label class="label-icon" for="navbar-search"><i class="material-icons">search</i></label>
+                  <i class="material-icons clear-icon">close</i>
+                </div>
+              </form>
+            </li>
             <li><a href="/logout">Logout</a></li>
           {%endif%}
           </ul>
@@ -107,6 +145,35 @@
             document.getElementById('workoutId').value = workoutId;
           });
         }
+
+        const navbarSearch = document.querySelector('#navbar-search');
+        const navbarClearIcon = document.querySelector('.clear-icon');
+        navbarSearch.addEventListener('input', () => {
+          if (navbarSearch.value !== '') {
+            navbarClearIcon.style.display = 'block';
+          } else {
+            navbarClearIcon.style.display = 'none';
+          }
+        });
+        navbarClearIcon.addEventListener('click', () => {
+          navbarSearch.value = '';
+          navbarClearIcon.style.display = 'none';
+        });
+
+        // Sidenav Search
+        const sidenavSearch = document.querySelector('#sidenav-search');
+        const sidenavClearIcon = document.querySelectorAll('.clear-icon');
+        sidenavSearch.addEventListener('input', () => {
+          if (sidenavSearch.value !== '') {
+            sidenavClearIcon.forEach(icon => icon.style.display = 'block');
+          } else {
+            sidenavClearIcon.forEach(icon => icon.style.display = 'none');
+          }
+        });
+        sidenavClearIcon.forEach(icon => icon.addEventListener('click', () => {
+          sidenavSearch.value = '';
+          sidenavClearIcon.forEach(icon => icon.style.display = 'none');
+        }));
     </script>
     
     
