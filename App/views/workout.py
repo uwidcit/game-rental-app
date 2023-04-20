@@ -41,7 +41,28 @@ def saveWorkout():
   flash('Successfully Saved' + " " + workout.name)
   return redirect(request.referrer)
 
+@workout_views.route('/createworkout', methods=['POST'])
+@user_required
+def createWorkout():
+    data = request.form
 
+    pub = False
+    if data['pub'] == "true":
+      pub = True
+  
+    workout = save_personalworkout( name=data["name"],
+        muscle=data["muscle"],
+        equipment=data["equipment"],
+        difficulty=data["difficulty"],
+        sets=data["sets"],
+        reps=data["reps"],
+        day=data["day"],
+        type=data["type"],
+        weight =data["weight"] ,
+        pub=pub,
+        userId=current_user.id)
+    flash('Successfully Created' + " " + workout.name)
+    return redirect(request.referrer)
 
 # Use a single route for filtering
 @workout_views.route('/workouts/<value>', methods=['GET'])
@@ -64,13 +85,16 @@ def workout_page(value):
     #workout_type = request.args.get('type')
     #difficulty = request.args.get('difficulty')
     page = request.args.get('page', default=1, type=int)
-   
+    w_days = {"Monday": "mon", "Tuesday": "tue", 
+    "Wednesday": "wed", "Thursday": 
+    "thu", "Friday": "fri", 
+    "Saturday": "sat", "Sunday": "sun"}
     #if muscle is not None or workout_type is not None or difficulty is not None:
     # Call the get_all_workouts function with filter criteria and pagination parameters
     workouts = get_all_workouts1(muscle=muscle, workout_type=workout_type, difficulty=difficulty, page=page)    
       #print(workouts.items)
     # Pass the workouts and pagination information to the template
-    return render_template('workout.html', workouts=workouts, pagination=page, value=value.title())
+    return render_template('workout.html', workouts=workouts, pagination=page, value=value.title(),w_days=w_days)
     #else:
         # No filter criteria specified, redirect to all workouts page
      #   return redirect('/allworkouts')

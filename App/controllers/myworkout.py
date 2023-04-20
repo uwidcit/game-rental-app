@@ -1,4 +1,4 @@
-from App.models import UserWorkout, Workout, User
+from App.models import UserWorkout, Workout, User, PersonalWorkout
 from App.database import db
 from App.config import config
 
@@ -22,9 +22,30 @@ def save_workout(userId, workoutId,sets, reps, weight, day):
   db.session.commit()
   return workout
 
+def save_personalworkout(userId,name, type, muscle, equipment, difficulty, sets, reps, day,weight,pub=False):
+
+  workout =PersonalWorkout(name=name, muscle=muscle, equipment=equipment, difficulty=difficulty,
+                  sets=sets,reps=reps,day=day,pub=pub,userId=userId,type = type, weight=weight)
+  db.session.add(workout)
+  db.session.commit()
+  return workout
+
 def edit_workout(uwId,userId,sets,reps,weight,day):
   workout = UserWorkout.query.filter_by(uwId = uwId, userId=userId).first()
   if workout:
+    workout.sets = sets
+    workout.reps = reps
+    workout.weight = weight
+    workout.day = day
+    db.session.add(workout)
+    db.session.commit()
+    return workout
+  return None
+
+def edit_workout2(pwid,userId,name,sets,reps,weight,day):
+  workout = PersonalWorkout.query.filter_by(pwid = pwid, userId=userId).first()
+  if workout:
+    workout.name=name
     workout.sets = sets
     workout.reps = reps
     workout.weight = weight
@@ -42,11 +63,20 @@ def delete_workout(uwId,userId):
     return True
   return None
 
+def delete_workout2(pwid,userId):
+  workout = PersonalWorkout.query.filter_by(pwid = pwid, userId=userId).first()
+  if workout:
+    db.session.delete(workout)
+    db.session.commit()
+    return True
+  return None
+
 def get_workouts_by_day(userId,day):
   user = User.query.filter_by(id=userId).first()
   if user: 
-      workout = UserWorkout.query.filter_by(day = day, userId=userId).all()
-      return workout
+      workout1 = UserWorkout.query.filter_by(day = day, userId=userId).all()
+      workout2 = PersonalWorkout.query.filter_by(day = day, userId=userId).all()
+      return workout1, workout2
   else:
     return None
 

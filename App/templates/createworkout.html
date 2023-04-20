@@ -11,7 +11,7 @@
         <div class="card-content">
         <span class="card-title">Create Personal Workout</span>
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" method="POST" action="{{ url_for('workout_views.createWorkout')}}" id="createForm">
                 <div class="row">
                 <div class="input-field col s6">
                     <input id="name" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
@@ -49,42 +49,12 @@
                     <p>
                     <label for="days-of-week">Days of the Week</label>
                     </p>
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Monday</span>
-                      </label>
-                    
-                   
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Tuesday</span>
-                      </label>
-                                        
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Wednesday</span>
-                      </label>
-                                      
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Thursday</span>
-                      </label>
-                    
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Friday</span>
-                      </label>
-                    
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Saturday</span>
-                      </label>
-                    
-                      <label>
-                        <input name="days-of-week" type="radio" />
-                        <span>Sunday</span>
-                      </label>
-                    
+                    {% for day, value in w_days.items() %}
+                    <label>
+                      <input type="radio" name="day" value="{{ value }}" />
+                      <span>{{ day }}</span>
+                    </label>
+                    {% endfor %}                     
                   </div>
                   <div class="input-field col s12">
                     <label>
@@ -93,13 +63,14 @@
                     </label>
                   </div>
                 </div>
+                <div class="card-action">                                    
+                  <a href="#" class="waves-effect waves-light btn">Save</a>
+                  <a href="#" class="waves-effect waves-light btn"> Clear</a>
+              </div>
               </form>
             </div>
         </div>
-        <div class="card-action">                                    
-            <a href="#" class="waves-effect waves-light btn">Save</a>
-            <a href="#" class="waves-effect waves-light btn"> Clear</a>
-        </div>
+        
     </div>
 </div>
 </div>

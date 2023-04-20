@@ -20,206 +20,93 @@
         </div>
       </div>
     </div>
-  
-    <!-- Sections for each day of the week -->
-    <section class="day-section">
-      <div class="container">
-        <h2>Monday</h2>
-        <ul>
-          {% for workout in monday %}
-          {% for w in workouts %}
-          {% if w.workoutId == workout.workoutId %}
-          <li>
-            <div class="card horizontal">
-              <div class="card-stacked">
-                <div class="card-content">
-                  <span class="card-title">{{ w.name }}</span>
-                  <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                  <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
-                </div>
-                <div class="card-action">                  
-                  <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                  <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
-                </div>
-              </div>
-            </div>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </ul>
-      </div>
-    </section>
-  
-    <section class="day-section">
-      <div class="container">
-        <h2>Tuesday</h2>
-        <ul>
-          {% for workout in tuesday %}
-          {% for w in workouts %}
-          {% if w.workoutId == workout.workoutId %}
-          <li>
-            <div class="card horizontal">
-              <div class="card-stacked">
-                <div class="card-content">
-                  <span class="card-title">{{ w.name }}</span>
-                  <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                  <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
-                </div>
-                <div class="card-action">                                    
-                  <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                  <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
+    <ul class="collapsible popout">
+      {% for day, myworkouts in days.items() %}
+      <li>
+        <div class="collapsible-header">{{ day }}</div>
+        <div class="collapsible-body">
+          <ul>
+            {% for workout in myworkouts %}
+            {% for w in workouts %}
+            {% if w.workoutId == workout.workoutId %}
+            <li>
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <span class="card-title">{{ w.name }}</span>
+                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
+                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
+                  </div>
+                  <div class="card-action">                                    
+                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
+                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </ul>
-      </div>
-    </section>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
 
-    <section class="day-section">
-        <div class="container">
-          <h2>Wednesday</h2>
+
+    <ul class="collapsible popout">
+      {% for day, myworkouts in days.items() %}
+      <li>
+        <div class="collapsible-header">{{ day }}</div>
+        <div class="collapsible-body">
           <ul>
-            {% for workout in wednesday %}
-            {% for w in workouts %}
-            {% if w.workoutId == workout.workoutId %}
+            {% for workout1, workout2 in myworkouts %}
+            {% for w1 in workout1 %}
+            {% for w2 in workouts %}
+            {% if w1.workoutId == w2.workoutId %}
             <li>
               <div class="card horizontal">
                 <div class="card-stacked">
                   <div class="card-content">
-                    <span class="card-title">{{ w.name }}</span>
-                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
+                    <span class="card-title">{{ w2.name }}</span>
+                    <p>Sets: {{ w1.sets }} Reps: {{ w1.reps }} Weight: {{ w1.weight }}</p>
+                    <p>Equipment: {{ w2.equipment }} Target Muscle: {{ w2.muscle }}</p>
                   </div>
                   <div class="card-action">                                    
-                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
+                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ w1.uwId }}" data-workout-name="{{ w2.name }}">Edit</a>
+                    <a href="/myworkouts/{{ w1.uwId }}">Delete</a>
                   </div>
                 </div>
               </div>
             </li>
             {% endif %}
             {% endfor %}
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      <section class="day-section">
-        <div class="container">
-          <h2>Thursday</h2>
-          <ul>
-            {% for workout in thursday %}
-            {% for w in workouts %}
-            {% if w.workoutId == workout.workoutId %}
+            {% endfor %} 
+            {% for w2 in workout2 %}                      
             <li>
               <div class="card horizontal">
                 <div class="card-stacked">
                   <div class="card-content">
-                    <span class="card-title">{{ w.name }}</span>
-                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
+                    <span class="card-title">{{ w2.name }}</span>
+                    <p>Sets: {{ w2.sets }} Reps: {{ w2.reps }} Weight: {{ w2.weight }}</p>
+                    <p>Equipment: {{ w2.equipment }} Target Muscle: {{ w2.muscle }}</p>
                   </div>
                   <div class="card-action">                                    
-                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
+                    <a class="modal-trigger2" href="#modal2" data-pworkout-id="{{ w2.pwid }}" data-pworkout-name="{{ w2.name }}">Edit</a>
+                    <a href="/personalworkouts/{{ w2.pwid }}">Delete</a>
                   </div>
                 </div>
               </div>
             </li>
-            {% endif %}
+            
             {% endfor %}
             {% endfor %}
           </ul>
         </div>
-      </section>
-      <section class="day-section">
-        <div class="container">
-          <h2>Friday</h2>
-          <ul>
-            {% for workout in friday %}
-            {% for w in workouts %}
-            {% if w.workoutId == workout.workoutId %}
-            <li>
-              <div class="card horizontal">
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <span class="card-title">{{ w.name }}</span>
-                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
-                  </div>
-                  <div class="card-action">                                    
-                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      <section class="day-section">
-        <div class="container">
-          <h2>Saturday</h2>
-          <ul>
-            {% for workout in saturday %}
-            {% for w in workouts %}
-            {% if w.workoutId == workout.workoutId %}
-            <li>
-              <div class="card horizontal">
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <span class="card-title">{{ w.name }}</span>
-                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
-                  </div>
-                  <div class="card-action">                                    
-                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      <section class="day-section">
-        <div class="container">
-          <h2>Sunday</h2>
-          <ul>
-            {% for workout in sunday %}
-            {% for w in workouts %}
-            {% if w.workoutId == workout.workoutId %}
-            <li>
-              <div class="card horizontal">
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <span class="card-title">{{ w.name }}</span>
-                    <p>Sets: {{ workout.sets }} Reps: {{ workout.reps }} Weight: {{ workout.weight }}</p>
-                    <p>Equipment: {{ w.equipment }} Target Muscle: {{ w.muscle }}</p>
-                  </div>
-                  <div class="card-action">                                    
-                    <a class="modal-trigger" href="#modal1" data-workout-id="{{ workout.uwId }}" data-workout-name="{{ w.name }}">Edit</a>
-                    <a href="/myworkouts/{{ workout.uwId }}">Delete</a>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-          </ul>
-        </div>
-      </section>  
+      </li>
+      {% endfor %}
+    </ul>
+      
     <!-- Repeat section for Wednesday through Sunday -->    
     <div id="modal1" class="modal">
       <div class="modal-content">
@@ -240,34 +127,51 @@
           </div>
          
           <p>Days:</p>
+          {% for day, value in w_days.items() %}
           <label>
-            <input type="radio" name="day" value="mon" />
-            <span>Mon</span>
+            <input type="radio" name="day" value="{{ value }}" />
+            <span>{{ day }}</span>
           </label>
+          {% endfor %}
+          
+          <div class="modal-footer">
+            <button type="submit" class="waves-effect waves-green btn-flat">Edit</button>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4 id="modal-title2"></h4>
+        <form method="POST" action="{{ url_for('myworkouts_views.editPersonalWorkout')}}" id="editPersonalForm"> 
+          <input type="hidden" id="pwid" name="pwid" value="1">         
+          <div class="input-field">
+            <input id="name" type="text" name ="name" class="validate">
+            <label for="anme">Name</label>
+          </div>
+          <div class="input-field">
+            <input id="sets" type="number" name ="sets" class="validate">
+            <label for="sets">Sets</label>
+          </div>
+          <div class="input-field">
+            <input id="reps" type="number" name ="reps" class="validate">
+            <label for="reps">Reps</label>
+          </div>
+          <div class="input-field">
+            <input id="weight" type="text" name = "weight" class="validate">
+            <label for="weight">Weight</label>
+          </div>
+         
+          <p>Days:</p>
+          {% for day, value in w_days.items() %}
           <label>
-            <input type="radio" name="day" value="tue" />
-            <span>Tue</span>
+            <input type="radio" name="day" value="{{ value }}" />
+            <span>{{ day }}</span>
           </label>
-          <label>
-            <input type="radio" name="day" value="wed" />
-            <span>Wed</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="thu" />
-            <span>Thur</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="fri" />
-            <span>Fri</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="sat" />
-            <span>Sat</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="sun" />
-            <span>Sun</span>
-          </label>
+          {% endfor %}
+          
           <div class="modal-footer">
             <button type="submit" class="waves-effect waves-green btn-flat">Edit</button>
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>

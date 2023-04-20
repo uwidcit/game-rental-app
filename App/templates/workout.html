@@ -56,34 +56,12 @@
           </div>
          
           <p>Days:</p>
+          {% for day, value in w_days.items() %}
           <label>
-            <input type="radio" name="day" value="mon" />
-            <span>Mon</span>
+            <input type="radio" name="day" value="{{ value }}" />
+            <span>{{ day }}</span>
           </label>
-          <label>
-            <input type="radio" name="day" value="tue" />
-            <span>Tue</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="wed" />
-            <span>Wed</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="thu" />
-            <span>Thur</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="fri" />
-            <span>Fri</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="sat" />
-            <span>Sat</span>
-          </label>
-          <label>
-            <input type="radio" name="day" value="sun" />
-            <span>Sun</span>
-          </label>
+          {% endfor %}          
           <div class="modal-footer">
             <button type="submit" class="waves-effect waves-green btn-flat">Save</button>
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
