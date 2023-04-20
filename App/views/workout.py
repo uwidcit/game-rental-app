@@ -6,6 +6,7 @@ from App.controllers import (
     #get_all_workouts_by_muscle,
    # get_all_workouts_by_type,
     #get_all_workouts_by_diffculty,
+    save_personalworkout,
     save_workout,
     get_all_workouts1,
     get_workout_by_id,
@@ -45,22 +46,22 @@ def saveWorkout():
 @user_required
 def createWorkout():
     data = request.form
-
     pub = False
-    if data['pub'] == "true":
-      pub = True
   
-    workout = save_personalworkout( name=data["name"],
-        muscle=data["muscle"],
-        equipment=data["equipment"],
-        difficulty=data["difficulty"],
-        sets=data["sets"],
-        reps=data["reps"],
-        day=data["day"],
-        type=data["type"],
-        weight =data["weight"] ,
-        pub=pub,
-        userId=current_user.id)
+    if 'public' in data:
+        pub = True
+  
+    workout = save_personalworkout(userId=current_user.id,
+                                   name=data["pname"],
+                                   muscle=data["muscle"],
+                                   equipment=data["equipment"],
+                                   difficulty=data["difficulty"],
+                                   sets=data["sets"],
+                                   reps=data["reps"],
+                                   day=data["day"],
+                                   type=data["type"],
+                                   weight=data["weight"],
+                                   pub=pub)
     flash('Successfully Created' + " " + workout.name)
     return redirect(request.referrer)
 

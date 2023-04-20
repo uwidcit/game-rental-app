@@ -14,35 +14,35 @@
             <form class="col s12" method="POST" action="{{ url_for('workout_views.createWorkout')}}" id="createForm">
                 <div class="row">
                 <div class="input-field col s6">
-                    <input id="name" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="name" type="text" class="validate" name="pname" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="name">Name</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="type" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="type" type="text" class="validate" name="type" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="type">Type</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="equipment" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="equipment" type="text" class="validate" name="equipment" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="equipment">Equipment</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="difficulty" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="difficulty" type="text" class="validate" name="difficulty" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="difficulty">Difficulty</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="target-muscle" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="target-muscle" type="text" class="validate" name="muscle" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="target-muscle" >Target Muscle</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="weight" type="text" class="validate" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="weight" type="text" class="validate" name ="weight" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="weight">Weight</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="sets" type="number" class="validate" min="1" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="sets" type="number" class="validate" min="1" name ="sets" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="sets">Sets</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="reps" type="number" class="validate" min="1" style="border-radius: 20px; border: 2px solid #ccc;">
+                    <input id="reps" type="number" class="validate" min="1" name="reps" style="border-radius: 20px; border: 2px solid #ccc;">
                     <label for="reps">Reps</label>
                 </div>
                   <div class="col s12 left-align">
@@ -58,14 +58,14 @@
                   </div>
                   <div class="input-field col s12">
                     <label>
-                      <input type="checkbox" class="filled-in" />
+                      <input type="checkbox" name="public" class="filled-in" />
                       <span>Add to Public Listing</span>
                     </label>
                   </div>
                 </div>
                 <div class="card-action">                                    
-                  <a href="#" class="waves-effect waves-light btn">Save</a>
-                  <a href="#" class="waves-effect waves-light btn"> Clear</a>
+                  <button type="submit" class="waves-effect waves-light btn">Save</button>
+                  <a href="#" id="clearForm" class="waves-effect waves-light btn"> Clear</a>
               </div>
               </form>
             </div>

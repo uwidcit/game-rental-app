@@ -233,6 +233,11 @@
           sidenavSearch.value = '';
           sidenavClearIcon.forEach(icon => icon.style.display = 'none');
         }));
+
+        document.querySelector("#clearForm").addEventListener("click", function(event) {
+          event.preventDefault();
+          document.querySelector("#createForm").reset();
+      });
     </script>
     
     

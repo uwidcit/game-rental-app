@@ -17,8 +17,8 @@ from App.controllers import (
 @myworkouts_views.route('/myworkouts', methods=['GET'])
 @user_required
 def myworkouts_page():
-    mon,mon1 = get_workouts_by_day(current_user.id,"mon")
-    tue,mon2 = get_workouts_by_day(current_user.id,"tue")
+    mon,mon2 = get_workouts_by_day(current_user.id,"mon")
+    tue,tue2 = get_workouts_by_day(current_user.id,"tue")
     wed,wed2 = get_workouts_by_day(current_user.id,"wed")
     thu,thu2 = get_workouts_by_day(current_user.id,"thu")
     fri,fri2 = get_workouts_by_day(current_user.id,"fri")

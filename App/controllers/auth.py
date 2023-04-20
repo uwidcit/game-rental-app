@@ -1,4 +1,5 @@
 from flask_login import login_user, current_user
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, url_for
 from App.models import db, User
 from .workout import cache_api_workouts
 from .user import create_user
@@ -25,7 +26,7 @@ def user_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if not current_user.is_authenticated or not isinstance(current_user, User):
-            return "Unauthorized", 401
+            return redirect('/')
         return func(*args, **kwargs)
     return wrapper
 

@@ -3,10 +3,12 @@ import requests
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 from App.controllers import (
     initialize,
+    user_required
 )
 
 
 @index_views.route('/home', methods=['GET'])
+@user_required
 def index_page():
     return render_template('home.html')
 
