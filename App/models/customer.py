@@ -7,11 +7,11 @@ class Customer(User):
     listings = db.relationship('Listing', backref=db.backref('owner', lazy='joined'))
     rentals = db.relationship('Rental', backref=db.backref('renter', lazy='joined'))
     payments = db.relationship('Payment', backref=db.backref('customer', lazy='joined'))
+    role = 'customer'
 
     def __init__(self, username, password):
         self.username = username
         self.set_password(password)
-        self.user_type = "customer"
 
     def __repr__(self):
         return f'<Customer {self.id} {self.username}>'

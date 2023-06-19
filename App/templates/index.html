@@ -5,8 +5,12 @@
 {% block menu %}
     <li class="active"><a class="waves-effect"  href="/">Browse Games</a></li>
     {% if current_user.is_authenticated %}
-        <li><a class="waves-effect"  href="/rentals">My Rentals</a></li>
-        <li><a class="waves-effect" href="/profile">Profile</a></li>
+        {% if current_user.role == 'staff' %}
+        <li><a class="waves-effect"  href="/transactions">Transactions</a></li>
+        {% elif current_user.role == 'customer' %}
+            <li><a class="waves-effect"  href="/rentals">My Rentals</a></li>    
+            <li><a class="waves-effect" href="/profile">Profile</a></li>
+        {% endif %}
     {% endif %}
     <li><a class="waves-effect" href="/about">About</a></li>
 {% endblock %}

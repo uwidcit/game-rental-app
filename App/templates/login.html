@@ -6,10 +6,6 @@
 
 {% block menu %}
     <li><a class="waves-effect"  href="/">Browse Games</a></li>
-    {% if current_user.is_authenticated %}
-        <li><a class="waves-effect"  href="/rentals">My Rentals</a></li>
-        <li><a class="waves-effect" href="/profile">Profile</a></li>
-    {% endif %}
     <li><a class="waves-effect" href="/about">About</a></li>
 {% endblock %}
 
@@ -20,11 +16,11 @@
                 <div class="card-content">
                     <form action="/login" method="POST">
                         <div class="input-field">
-                            <input id="username" type="text" value="rob" name="username" required>
+                            <input id="username" type="text" value="bob" name="username" required>
                             <label for="username">Username</label>
                         </div>
                         <div class="input-field">
-                            <input id="password" type="password" value="robpass" name="password" required>
+                            <input id="password" type="password" value="bobpass" name="password" required>
                             <label for="password">Password</label>
                         </div>
                         <div class="input-field">
@@ -36,7 +32,7 @@
                             </p>
                             <p>
                                 <label>
-                                    <input name="role" type="radio" class="blue accent-3" value="admin"/>
+                                    <input name="role" type="radio" class="blue accent-3" value="staff"/>
                                     <span>Staff</span>
                                 </label>
                             </p>

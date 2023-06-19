@@ -1,5 +1,6 @@
 from App.models import User, Staff, Customer
 from App.database import db
+from sqlalchemy.exc import SQLAlchemyError
 
 
 def create_staff(username, password):
@@ -8,7 +9,7 @@ def create_staff(username, password):
         db.session.add(newuser)
         db.session.commit()
         return newuser
-    except:
+    except :
         return None
 
 def create_customer(username, password):
@@ -17,7 +18,9 @@ def create_customer(username, password):
         db.session.add(newuser)
         db.session.commit()
         return newuser
-    except:
+    except SQLAlchemyError as e:
+        db.session.rollback()  # Roll back any pending database changes
+        print(e)
         return None
 
 def get_staff(id):

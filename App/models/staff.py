@@ -5,11 +5,11 @@ from .rental_payment import RentalPayment
 from App.database import db
 
 class Staff(User):
+    role = 'staff'
 
     def __init__(self, username, password):
         self.username = username
         self.set_password(password)
-        self.user_type = "staff"
     
     def __repr__(self):
         return f'<Staff {self.id} {self.username}>'
