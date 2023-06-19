@@ -32,6 +32,7 @@ def get_outstanding_customer_rentals(customerId):
     if customer :
         return Rental.query.filter_by(renterId=customerId, return_date=None).all()
     return []
+
         
 def get_outstanding_rentals():
     return Rental.query.filter_by(return_date=None).all()

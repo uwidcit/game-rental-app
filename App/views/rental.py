@@ -10,6 +10,5 @@ from App.controllers import get_outstanding_customer_rentals
 @customer_required
 @rental_views.route('/rentals', methods=['GET'])
 def index_page():
-    rentals = get_outstanding_customer_rentals(current_user.id)
-    print(rentals, current_user.id)
-    return render_template('rentals.html', rentals=rentals)
+    rentals, history = current_user.get_rentals()
+    return render_template('rentals.html', rentals=rentals, history=history)

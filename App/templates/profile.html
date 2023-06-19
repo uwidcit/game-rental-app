@@ -1,0 +1,25 @@
+<!-- profile.html -->
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block page %}Profile{% endblock %}
+
+{% block menu %}
+    <li><a class="waves-effect" href="/">Browse Games</a></li>
+    {% if current_user.is_authenticated %}
+        <li><a class="waves-effect" href="/rentals">My Rentals</a></li>
+        <li class="active"><a class="waves-effect" href="/profile">Profile</a></li>
+    {% endif %}
+    <li><a class="waves-effect" href="/about">About</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            <h4>Profile Information</h4>
+            <p><strong>First Name:</strong> {{ current_user.firstname }}</p>
+            <p><strong>Last Name:</strong> {{ current_user.lastname }}</p>
+            <p><strong>Username:</strong> {{ current_user.username }}</p>
+        </div>
+    </div>
+{% endblock %}

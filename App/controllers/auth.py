@@ -15,6 +15,20 @@ def login(username, password):
         return customer
     return None
 
+def login_customer(username, password):
+    customer = Customer.query.filter_by(username=username).first()
+    if customer and customer.check_password(password):
+        login_user(customer)
+        return customer
+    return None
+
+def login_staff(username, password):
+    staff = Staff.query.filter_by(username=username).first()
+    if staff and staff.check_password(password):
+        login_user(staff)
+        return staff
+    return None
+
 def initialize():
     db.drop_all()
     db.create_all()
