@@ -30,7 +30,7 @@ def is_staff(id):
     return Staff.query.get(id) != None
 
 def get_user_by_username(username):
-    return User.query.filter_by(username=username).first()
+    return User.query.filter_by(username=username).one_or_none()
 
 def get_user(id):
     return User.query.get(id)
@@ -46,6 +46,14 @@ def update_user(id, username):
     if user:
         user.username = username
         db.session.add(user)
-        return db.session.commit()
+        db.session.commit()
+        return user
     return None
-    
+
+def delete_customer(id):
+    customer = get_customer(id)
+    if customer:
+        db.remove(customer)
+        db.sesion.commt()
+        return True
+    return False

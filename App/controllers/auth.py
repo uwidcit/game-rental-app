@@ -39,7 +39,6 @@ def initialize():
     listing1 =  list_game(bob.id, rob.id, 23, 'ok', 11)
     list_game(bob.id, rob.id, 100, 'good', 12)
     list_game(bob.id, rob.id, 57, 'new', 13)
-    rental = create_rental(sally.id, listing1.listingId)
 
 def customer_required(func):
     @wraps(func)

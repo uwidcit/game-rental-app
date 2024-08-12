@@ -19,6 +19,7 @@ class Customer(User):
     def get_rentals(self):
         oustanding_rentals = []
         rental_history = []
+
         for rental in self.rentals:
             if rental.return_date is None:
                 oustanding_rentals.append(rental)
